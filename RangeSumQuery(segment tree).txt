@@ -1,0 +1,47 @@
+Problem: Range Sum Query - Mutable
+
+Given an integer array nums, handle multiple queries of the following types:
+
+1. Update the value of an element in nums.
+2. Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+
+
+
+
+class NumArray {
+public:
+    int n;
+    int bit[30006]={0};
+    vector<int> nums;
+    NumArray(vector<int>& num) {
+        n = num.size();
+        nums = num;
+        for(int i=0;i<n;i++)
+        {
+          for(int j = i+1; j<=n; j+= (j&-j))
+            bit[j]+=nums[i];  
+        }
+    }
+    
+    void update(int index, int val) {
+        int oldval = nums[index];
+        for(int i = index+1; i<=n; i+= (i&-i))
+            bit[i]+=val - oldval;
+        nums[index] = val;
+        
+    }
+    
+    int sumRange(int left, int right) {
+        right++;
+        int sumr=0;
+        for(;right>0; right-=(right&-right))
+            sumr+=bit[right];
+        
+        int suml=0;
+    
+        for(;left>0; left-=(left&-left))
+            suml+=bit[left];
+        return sumr-suml;
+        
+    }
+};
