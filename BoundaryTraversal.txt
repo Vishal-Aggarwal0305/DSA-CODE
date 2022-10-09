@@ -1,0 +1,51 @@
+void preorder(TreeNode<int> *p, vector<int> &v)
+{
+    if (p->left == NULL && p->right == NULL)
+    {
+        v.push_back(p->data);
+        return;
+    }
+    if (p->left)
+        preorder(p->left, v);
+    if (p->right)
+        preorder(p->right, v);
+}
+vector<int> traverseBoundary(TreeNode<int> *root)
+{
+    TreeNode<int> *p = root;
+    vector<int> v;
+    if (root->left || root->right)
+        v.push_back(root->data);
+
+    p = p->left;
+    while (p)
+    {
+        if (p->left || p->right)
+            v.push_back(p->data);
+        if (p->left)
+            p = p->left;
+        else
+            p = p->right;
+    }
+
+    p = root;
+    preorder(p, v);
+
+    vector<int> temp;
+    p = root->right;
+    while (p)
+    {
+        if (p->left || p->right)
+            temp.push_back(p->data);
+        if (p->right)
+            p = p->right;
+        else
+            p = p->left;
+    }
+
+    for (int i = temp.size() - 1; i >= 0; i--)
+    {
+        v.push_back(temp[i]);
+    }
+    return v;
+}
