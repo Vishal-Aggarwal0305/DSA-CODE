@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main()
+{
+    int x=20000;
+    float y;
+    float z;
+   
+    
+    printf("enter amount wchich you want to withdraw: ");
+    scanf("%f",&y);
+    
+    y+=0.95;
+    z=x-y;
+    printf("After withdraw, The remaining amount is --> %f\n", z);
+    
+    
+
+    return 0;
+}
