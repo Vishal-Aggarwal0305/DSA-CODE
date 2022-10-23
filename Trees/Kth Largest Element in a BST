@@ -1,0 +1,25 @@
+// Main ANSWER FUNCTION 
+
+int solve(Node*root,int &k){
+
+        static int ans=0;
+
+        if(!root || k<0)  return ans ;
+
+        f(root->right,k);
+
+        if((--k)==0) ans=root->data;
+
+        f(root->left,k);
+
+        return ans;
+
+    }
+
+    int kthLargest(Node *root, int K)
+
+    {
+
+       return  solve(root,K);
+
+    }   
