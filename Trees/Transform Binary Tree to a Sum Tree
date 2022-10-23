@@ -3,7 +3,7 @@
 int solve(Node* node){
         if(node == NULL) return 0;
         
-    
+    // Denotes left and right recursive calls
      int l = solve(node->left);
      int r = solve(node->right);
         
