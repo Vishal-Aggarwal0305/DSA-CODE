@@ -1,0 +1,22 @@
+// Main Answer Function
+
+int solve(Node* node){
+        if(node == NULL) return 0;
+        
+    
+     int l = solve(node->left);
+     int r = solve(node->right);
+        
+        int p = node->data;
+        node->data = l+r;
+        
+        return node->data+p;
+    
+    
+}
+
+void toSumTree(Node* node){
+    solve(node);
+}
+
+
