@@ -2,6 +2,7 @@
 
 int solve(Node*root,int &k){
 
+        
         static int ans=0;
 
         if(!root || k<0)  return ans ;
