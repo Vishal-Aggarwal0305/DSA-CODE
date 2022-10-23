@@ -6,11 +6,11 @@ int solve(Node*root,int &k){
 
         if(!root || k<0)  return ans ;
 
-        f(root->right,k);
+        solve(root->right,k);
 
         if((--k)==0) ans=root->data;
 
-        f(root->left,k);
+        solve(root->left,k);
 
         return ans;
 
