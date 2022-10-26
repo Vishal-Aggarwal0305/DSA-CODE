@@ -1,0 +1,37 @@
+// Actual Answer Function
+
+void createMap(int in[], map<int,int> &nodeToIndex, int n ){
+        for(int i =0; i<n; i++){
+            nodeToIndex[in[i]] = i;
+        }
+    }
+    
+    Node* solve(int in[], int pre[], int &index, int inorderStartIndex,
+                    int inorderEndIndex, int n, map<int,int> &nodeToIndex){
+        
+        if(index >= n || inorderStartIndex > inorderEndIndex) return NULL;
+        
+        //create a node for element
+        int element = pre[index];
+        index++;
+        Node* root = new Node(element);
+        
+        //Find the index of element in Inorder
+        int posi = nodeToIndex[element] ;     
+        
+        //Recursive calls
+        root->left = solve(in, pre, index, inorderStartIndex, posi-1, n, nodeToIndex);
+        root->right = solve(in, pre, index, posi+1, inorderEndIndex, n,nodeToIndex);
+        
+        return root;
+        
+    }
+    
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        int preOrderIndex = 0;
+        map<int, int> nodeToIndex;
+        createMap(in, nodeToIndex, n);
+        Node* ans = solve(in, pre, preOrderIndex, 0, n-1, n, nodeToIndex);
+        return ans;
+    }
