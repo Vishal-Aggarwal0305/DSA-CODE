@@ -1,0 +1,18 @@
+// Actual Answer Function
+
+void mirror(Node* node) {
+
+      //Base Case
+        if(!node) return;
+        
+       
+        Node* temp = node->left;
+        node->left = node->right;
+        node->right = temp;
+       
+       //Left and Right Calls
+       
+        mirror(node->left);
+        mirror(node->right);
+        
+     }
